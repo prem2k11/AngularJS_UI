@@ -1,0 +1,23 @@
+{
+    "/user-service/*": {
+      "target": "http://localhost:8765/",
+      "secure": false,
+      "changeOrigin": true,
+      "logLevel": "debug"
+    },
+    "/project-service/*": {
+      "target": "http://localhost:8765/",
+      "secure": false,
+      "changeOrigin": true,
+      "logLevel": "debug"
+    },
+    "/task-service/*": {
+      "target": "http://localhost:8765/",
+      "secure": false,
+      "changeOrigin": true,
+      "logLevel": "debug"
+    }
+
+
+
+  }

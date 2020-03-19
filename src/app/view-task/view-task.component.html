@@ -1,0 +1,79 @@
+<div class="container-fluid viewTask overflow-auto mt-5 ml-3 mt-2 mb-5 mr-3 border border-primary border-size-1">
+    
+    <div class="form-group row overflow-auto overflow-wrap:break-word  mt-2 mb-2 mr-3" >
+        <div class="field1 col-sm-3 border border-dark border-size-1">
+            <font size="4" color="blue" class="mt-1 mb-1"><b>Project :</b></font>
+        </div>
+        <div class="col-sm-7 border border-primary border-size-1 ml-2 mr-2">
+            <input type="text" id="projectfield" name="projectfield"  placeholder="Enter Project Name..." 
+            [(ngModel)]="projectSearch" class="fieldValue1 form-control-plaintext text-black ">
+        </div>
+        <div class="col-sm">
+            <button type="button" class="p-1 btn btn-dark btn-sm text-white float-left" (click)="searchProject()"> Search </button>
+        </div>
+    </div>
+    <div class="row-sm" >
+        <font size="4" color="blue" class="mt-1 mb-1"><b>Searched Project :{{projSearchValue}}</b></font>
+    </div>
+
+    <div class="container-fluid buttons1 row pt-1 mb-2 mr-3">
+        <div class="col-sm-2 ">
+            <font size="3" color="blue" class="mt-1 mb-1"><b>Sort By :</b></font>
+        </div>
+        <div class="col-sm-2">
+            <button type="button" class="p-1 btn btn-dark btn-sm text-white float-left" (click)="sortByStartDate()"> StartDate </button>
+        </div>
+        <div class="col-sm-2">
+            <button type="button" class="p-1 btn btn-dark btn-sm text-white float-left" (click)="sortByEndDate()"> EndDate </button>
+        </div>
+        <div class="col-sm-2">
+            <button type="button" class="p-1 btn btn-dark btn-sm text-white float-left" (click)="sortByPriority()"> Priority </button>
+        </div>
+    
+    </div>
+    <div class="row overflow-auto overflow-wrap:break-word  mt-2 mr-3 " >
+        <div class="col-sm-2 border border-dark border-size-1">
+            <font size="2"><b>Task</b></font>
+        </div>
+        <div class="col-sm-2 border border-dark border-size-1 ">
+            <font size="2"><b>Parent</b></font>
+        </div>
+        <div class="col-sm-1 border border-dark border-size-1">
+            <font size="2"><b>Priority</b></font>
+        </div>
+        <div class="col-sm-2 border border-dark border-size-1">
+            <font size="2"><b>Start Date</b></font>
+        </div>
+        <div class="col-sm-2 border border-dark border-size-1 ">
+            <font size="2"><b>End Date</b></font>
+        </div>        
+        <div class="col-sm-1">
+        </div>
+        <div class="col-sm-2">
+        </div>
+    </div> 
+    <div class="row mr-3 mb-1" *ngFor="let projTask of projectTasks">
+        <div class="col-sm-2 border border-right-dark border-size-1">
+            <font size="2">{{projTask.taskname}}</font>
+        </div>
+        <div class="col-sm-2 border border-right-dark border-size-1">
+            <font size="2">{{projTask.parentTaskEntity.parenttask}}</font>
+        </div>
+        <div class="col-sm-1 border border-right-dark border-size-1">
+            <font size="2">{{projTask.priority}}</font>
+        </div>
+        <div class="col-sm-2 border border-right-dark border-size-1">
+            <font size="2">{{projTask.startdate}}</font>
+        </div>
+        <div class="col-sm-2 border border-right-dark border-size-1">
+            <font size="2">{{projTask.enddate}}</font>
+        </div>
+        <div class="col-sm-1 ">
+            <button type="button" class="p-1 btn btn-primary btn-sm text-white float-left" (click)="editRedirect(projTask)"> Edit </button>
+        </div>
+        <div class="col-sm-2 ">
+            <button type="button" class="p-1 btn btn-primary btn-sm text-white float-left" (click)="endTask(projTask)"> End Task </button>
+        </div>
+</div>
+
+

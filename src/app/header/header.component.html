@@ -1,0 +1,28 @@
+<nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-info p-0">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" [routerLink]="['/addProject']"><font size="5" color="white"><b>Project Manager</b></font></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbartext">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+      <div class="collapse navbar-collapse" id="navbartext">
+        <ul class="nav navbar-nav nav-fill ml-auto">
+          <li class="nav-item">
+            <a class="btn btn-outline-danger btn-secondary nav-link mr-1" [routerLink]="['/addProject']">Add Project</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-outline-danger btn-secondary nav-link mr-1" [routerLink]="['/addTask']">Add Task</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-outline-danger btn-secondary nav-link mr-1" [routerLink]="['/addUser']">Add User</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-outline-danger btn-secondary nav-link mr-1" [routerLink]="['/viewTask']">View Task</a>
+        </li>
+        </ul>
+      </div>
+    </div>
+    
+  </nav>
+

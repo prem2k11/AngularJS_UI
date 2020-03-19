@@ -1,0 +1,22 @@
+.navbar {
+    width: 80%;
+    text-justify: center;
+    font-style: normal;
+    -webkit-text-fill-color: white;
+    
+  }
+  
+  .nav-link{
+      -webkit-text-fill-color: white;
+  }
+  
+  .navbar-default .navbar-brand{
+      color:white;
+  }
+  
+  .container{
+  padding-left:10px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  }
+  

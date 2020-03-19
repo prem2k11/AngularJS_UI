@@ -1,0 +1,25 @@
+.viewTask{
+    height: 100%;
+    width: 75%;
+    padding-left: 70px;
+    padding-top: 35px;
+
+}
+.field1{
+    text-align: center;
+    color: blue;
+}
+.fieldValue1{
+    background-color: white;
+}
+.buttons1
+{
+  text-justify: center;
+  font-style: normal;
+
+}
+.header{
+    text-align: center;
+    text-decoration: black;
+}
+

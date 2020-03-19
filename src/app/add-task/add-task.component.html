@@ -1,0 +1,125 @@
+<div class="container-fluid addTask overflow-auto ml-3 mt-5 mb-5 mr-3 border border-primary border-size-1">
+    <form name="addTaskForm"(ngSubmit)="createTask()" #pmtf="ngForm">
+    <div class="form-group row overflow-auto overflow-wrap:break-word  mt-2 mb-2 mr-3" >
+        <div class="field1 col-sm-3 border border-dark border-size-1">
+            <font size="4" color="blue" class="mt-1 mb-1"><b>Project :</b></font>
+        </div>
+        <div class="col-sm-7 border border-primary border-size-1 ml-2 mr-2">
+            <input type="text" id="projectfield" name="projectfield"  placeholder="Enter Project Name..." 
+            form-control required ngModel #projectfield="ngModel" 
+            [(ngModel)]="projectSearch" class="fieldValue1 form-control-plaintext text-black ">
+        </div>
+        <div class="col-sm">
+            <button type="button" class="p-1 btn btn-dark btn-sm text-white float-left" (click)="searchProject()"> Search </button>
+        </div>
+    </div>
+    <div class="row-sm" >
+        <font size="4" color="blue" class="mt-1 mb-1"><b>Searched Project :{{projSearchValue}}</b></font>
+    </div>
+    <div class="row-sm">
+        <span class="help-block text-danger text-center ml-2" *ngIf="!projectfield.valid && projectfield.touched">Project Name is Mandatory</span>
+    </div>
+    <div class="form-group row overflow-auto overflow-wrap:break-word  mt-2 mb-2 mr-3" >
+        <div class="field1 col-sm-3 border border-dark border-size-1">
+            <font size="4" color="blue" class="mt-1 mb-1"><b>Task :</b></font>
+        </div>
+        <div class="col-sm-7 border border-primary border-size-1 ml-2 mr-2">
+            <input type="text" id="taskfield" name="taskfield" form-control required ngModel 
+            #taskfield="ngModel" [(ngModel)]="task.taskname" placeholder="Enter Task Detail..." 
+            class="fieldValue1 form-control-plaintext text-black ">
+        </div>
+    </div>
+    <div class="row-sm">
+        <span class="help-block text-danger text-center ml-2" *ngIf="!taskfield.valid && taskfield.touched">Task Name is Mandatory</span>
+    </div>
+    <div class="form-group row overflow-auto overflow-wrap:break-word  mt-2 mb-2 mr-3" >
+      
+        <div class="col-sm-7 ml-2 mr-2">
+            <input type="checkbox" id="parentcheck" name="parentcheck"  [(ngModel)]="parentcheckslt" (click)="hideDetail()">
+                <font size="4" color="blue" class="mt-1 mb-1"><b> Parent Task </b></font>
+        </div>
+    </div>
+    <div class="form-group container-fluid buttons1 row pt-1 mb-2 mr-3" [hidden]="!parentcheckslt">
+        <div class="col-sm-6">
+            <button type="button" name="add" class="p-1 btn btn-primary btn-sm text-white float-right" [hidden]="isEdit" [disabled]="!taskfield.valid && taskfield.touched" (click)="createParentTask()"><i class="fas fa-plus"></i> ADD </button>
+        </div>
+        <div class="col-sm-2">
+            <button type="button" class="p-1 btn btn-danger btn-sm text-white float-right" (click)="onReset()"><i class="fas fa-refresh"></i> RESET </button>
+        </div>
+    </div>
+    <div class="form-group row overflow-auto overflow-wrap:break-word  mt-2 mb-2 mr-3" [hidden]="parentcheckslt" ng-hide="parentcheckslt" >
+        <div class="field1 col-sm-3 border border-dark border-size-0">
+            <font size="4" color="blue" class="mt-1 mb-1"><b>Priority :</b></font>
+        </div>
+        <div class="col-sm-1">
+            <span class="font-weight-bold indigo-text mt-1 ">0</span>    
+        </div>
+        <div class="col-sm">
+            <input type="range" name="rangefield" class="custom-range mt-1" [(ngModel)]="task.priority" 
+            min="0" max="30" id="rangefield" value="0" oninput>
+        </div>
+        <div class="col-sm-1">
+            <span class="font-weight-bold indigo-text mt-1 float-left">30</span>
+        </div>
+    </div>
+    <div class="row-sm" [hidden]="parentcheckslt">
+        <font size="4" color="blue" class="mt-1 mb-1"><b>Selected Priority: {{task.priority}}</b></font>
+    </div>
+    <div class="form-group row overflow-auto overflow-wrap:break-word  mt-2 mb-2 mr-3" [hidden]="parentcheckslt">
+        <div class="field1 col-sm-3 border border-dark border-size-1">
+            <font size="4" color="blue" class="mt-1 mb-1"><b>Parent Task:</b></font>
+        </div>
+        <div class="col-sm-7 border border-primary border-size-1 ml-2 mr-2">
+            <input type="text" placeholder="Enter Parent Task..."  id="parentTask" name="parentTask" 
+            form-control required ngModel #parentTask="ngModel" 
+            [(ngModel)]="parentSearch" class="fieldValue1 form-control-plaintext text-black ">
+        </div>
+        <div class="col-sm">
+            <button type="button" class="p-1 btn btn-dark btn-sm text-white float-left" (click)="searchParent()"> Search </button>
+        </div>
+    </div>
+    <div class="row-sm" [hidden]="parentcheckslt">
+        <font size="4" color="blue" class="mt-1 mb-1"><b>Searched Parent Task :{{parentSearchValue}}</b></font>
+    </div>
+    <div class="form-group row overflow-auto overflow-wrap:break-word  mt-2 mb-2 mr-3" [hidden]="parentcheckslt">
+        <div class="field1 col-sm-3 border border-dark border-size-1">
+            <font size="4" color="blue" class="mt-1 mb-1"><b>Start Date :</b></font>
+        </div>
+        <div class="col-sm-3">
+            <input type="dateType" [disabled]="datesDisabled" id="startdatefield" name="startdatefield"
+            class="fieldValue2 " [(ngModel)]="task.startdate"  (click)="setDates()" required>
+        </div>
+        <div class="field1 col-sm-3 border border-dark border-size-1">
+            <font size="4" color="blue" class="mt-1 mb-1"><b>End Date :</b></font>
+        </div>
+        <div class="col-sm-3">
+            <input type="dateType" [disabled]="datesDisabled" id="enddatefield" name="enddatefield"
+            class="fieldValue3" [(ngModel)]="task.enddate" (click)="setDates()" required >
+        </div>
+    </div>
+    <div class="form-group row overflow-auto overflow-wrap:break-word  mt-2 mb-2 mr-3" [hidden]="parentcheckslt">
+        <div class="field1 col-sm-3 border border-dark border-size-1">
+            <font size="4" color="blue" class="mt-1 mb-1"><b>User:</b></font>
+        </div>
+        <div class="col-sm-7 border border-primary border-size-1 ml-2 mr-2">
+            <input type="text" placeholder="Enter User..." id="userfield" name="userfield" 
+            [(ngModel)]="userSearch" class="fieldValue1 form-control-plaintext text-black ">
+        </div>
+        <div class="col-sm">
+            <button type="button" class="p-1 btn btn-dark btn-sm text-white float-left" (click)="searchUser()"> Search </button>
+        </div>
+    </div>
+    <div class="row-sm" [hidden]="parentcheckslt">
+        <font size="4" color="blue" class="mt-1 mb-1"><b>Searched User :{{userSearchValue}}</b></font>
+    </div>
+    <div class="form-group container-fluid buttons1 row pt-1 mb-2 mr-3" [hidden]="parentcheckslt">
+        <div class="col-sm-6">
+            <button type="button" name="add" class="p-1 btn btn-primary btn-sm text-white float-right" [hidden]="isEdit" type="submit" [disabled]="!pmtf.valid"><i class="fas fa-plus"></i> ADD </button>
+            <button type="button" name="update" class="p-1 btn btn-primary btn-sm text-white float-right" [hidden]="!isEdit" [disabled]="!pmtf.valid" (click)="updateTask(task)"><i class="fas fa-plus"></i> UPDATE </button>
+        </div>
+        <div class="col-sm-2">
+            <button type="button" class="p-1 btn btn-danger btn-sm text-white float-right" (click)="onReset()"><i class="fas fa-refresh"></i> RESET </button>
+        </div>
+    </div>
+    </form>
+</div>

@@ -1,0 +1,127 @@
+<div class="container-fluid addUser overflow-auto ml-3 mt-5 mb-5 mr-3 border border-primary border-size-1">
+    <form name="adduserform"(ngSubmit)="createUser()" #pmf="ngForm">
+    <div class="form-group row overflow-auto overflow-wrap:break-word  mt-2 mb-2 mr-3" >
+        <div class="field1 col-sm-3 border border-dark border-size-1">
+            <font size="4" color="blue" class="mt-1 mb-1"><b>First Name :</b></font>
+        </div>
+        <div class="col-sm-7 border border-primary border-size-1 ml-2 mr-3">
+            <input type="text" id="fnfield" name="fnfield" form-control required ngModel #fnfield="ngModel" 
+            [(ngModel)]="user.firstname" placeholder="Enter First Name..." 
+            class="fieldValue1 form-control-plaintext text-black ">
+        </div>
+        <div class="col-sm">
+            <span class="help-block text-danger text-center ml-2" *ngIf="!fnfield.valid && fnfield.touched">First Name is Mandatory</span>
+        </div>
+    </div>
+    <div class="form-group row overflow-auto overflow-wrap:break-word  mt-2 mb-2 mr-3" >
+        <div class="field1 col-sm-3 border border-dark border-size-1">
+            <font size="4" color="blue" class="mt-1 mb-1"><b>Last Name :</b></font>
+        </div>
+        <div class="col-sm-7 border border-primary border-size-1 ml-2 mr-2">
+            <input type="text" id="lnfield" name="lnfield" form-control required ngModel #lnfield="ngModel" [(ngModel)]="user.lastname" 
+            placeholder="Enter Last Name..." class="fieldValue1 form-control-plaintext text-black "> 
+        </div>
+        <div class="col-sm">
+            <span class="help-block text-danger text-center ml-2" *ngIf="!lnfield.valid && lnfield.touched">Last Name is Mandatory</span>
+        </div>
+    </div>
+    <div class="form-group row overflow-auto overflow-wrap:break-word  mt-2 mb-2 mr-3" >
+        <div class="field1 col-sm-3 border border-dark border-size-1">
+            <font size="4" color="blue" class="mt-1 mb-1"><b>Employee Id :</b></font>
+        </div>
+        <div class="col-sm-7 border border-primary border-size-1 ml-2 mr-2">
+            <input type="text" id="empidfield" name="empidfield" form-control required ngModel #empidfield="ngModel" [(ngModel)]="user.employeeid" 
+            placeholder="Enter Employee Id..." class="fieldValue1 form-control-plaintext text-black ">
+            
+        </div>
+        <div class="col-sm">
+            <span class="help-block text-danger text-center ml-2" *ngIf="!empidfield.valid && empidfield.touched">Employee Id is Mandatory</span>
+        </div>
+    </div>
+    <div class="form-group container-fluid buttons1 row pt-1 mb-2 mr-3">
+        <div class="col-sm-6">
+            <button type="button" name="add" class="p-1 btn btn-primary btn-sm text-white float-right" [hidden]="isEdit" type="submit" [disabled]="!pmf.valid"><i class="fas fa-plus"></i> ADD </button>
+            <button type="button" name="update" class="p-1 btn btn-primary btn-sm text-white float-right" [hidden]="!isEdit" type="button" [disabled]="!pmf.valid" (click)="updateUser(user)"><i class="fas fa-plus"></i> UPDATE </button>
+        </div>
+        <div class="col-sm-2">
+            <button type="reset" name="reset" class="p-1 btn btn-danger btn-sm text-white float-right"><i class="fas fa-refresh"></i> RESET </button>
+        </div>
+    </div>
+</form>
+</div>
+<div class="container-fluid addUser overflow-auto mt-5 ml-3 mt-2 mb-5 mr-3 border border-primary border-size-1">
+    
+    <div class=" form-group row overflow-auto overflow-wrap:break-word  mt-2 mb-2 mr-3" >
+        <div class="col-sm-2">
+            <font size="4" color="blue" class="mt-1 mb-1"><b>Search By :</b></font>
+        </div>
+        <div class="form-check col-sm-2">
+            <input type="radio" class="form-check-input" id="searchOption1" name="searchOptions" [(ngModel)]="searchOption" value="firstname" checked>
+            <font size="2"><b>First Name</b></font>
+        </div>
+        <div class="form-check col-sm-2">
+            <input type="radio" class="form-check-input" id="searchOption2" name="searchOptions" [(ngModel)]="searchOption" value="lastname">
+            <font size="2"><b>Last Name</b></font>
+        </div>
+        <div class="form-check col-sm-2">
+            <input type="radio" class="form-check-input" id="searchOption3" name="searchOptions" [(ngModel)]="searchOption" value="employeeid">
+            <font size="2"><b>Employee Id</b></font>
+        </div>
+    </div> 
+    <div class="form-group row overflow-auto overflow-wrap:break-word  mt-2 mb-2 mr-3" >
+        <div class="col-sm-7 border border-primary border-size-1 mr-2">
+            <input type="text" name="searchfield"  placeholder="Search..." class="fieldValue1 form-control-plaintext text-black " [(ngModel)]="searchValue">
+        </div>
+        <div class="col-sm-2">
+            <button type="button" name="searchbtn" class="p-1 btn btn-dark btn-sm text-white float-left" (click)="searchUser()"> Search </button>
+        </div>
+    </div>
+    
+    <div class="container-fluid buttons1 row pt-1 mb-2 mr-3">
+        <div class="col-sm-2 ">
+            <font size="4" color="blue" class="mt-1 mb-1"><b>Sort By :</b></font>
+        </div>
+        <div class="col-sm-2">
+            <button type="button" class="p-1 btn btn-dark btn-sm text-white float-left" (click)="getFNSortedUser()"> First Name </button>
+        </div>
+        <div class="col-sm-2">
+            <button type="button" class="p-1 btn btn-dark btn-sm text-white float-left" (click)="getLNSortedUser()"> Last Name </button>
+        </div>
+        <div class="col-sm-2">
+            <button type="button" class="p-1 btn btn-dark btn-sm text-white float-left" (click)="getEMPSortedUser()"> Emp Id </button>
+        </div>
+    </div>
+    <div class="row overflow-auto overflow-wrap:break-word  mt-2 mr-3 " >
+        <div class="col-sm-2 border border-dark border-size-1">
+            <font size="2"><b>First Name</b></font>
+        </div>
+        <div class="col-sm-2 border border-dark border-size-1 ">
+            <font size="2"><b>Last Name</b></font>
+        </div>
+        <div class="col-sm-2 border border-dark border-size-1">
+            <font size="2"><b>Empl Id</b></font>
+        </div>       
+        <div class="col-sm-1">
+        </div>
+        <div class="col-sm-1">
+        </div>
+    </div> 
+    <div class="row  mr-3 mb-1" *ngFor="let user of users">
+        <div class="col-sm-2 border border-right-dark border-size-1">
+            <font size="2">{{user.firstname}}</font>
+        </div>
+        <div class="col-sm-2 border border-right-dark border-size-1">
+            <font size="2">{{user.lastname}}</font>
+        </div>
+        <div class="col-sm-2 border border-right-dark border-size-1">
+            <font size="2">{{user.employeeid}}</font>
+        </div>
+        <div class="col-sm-1">
+            <button type="button" class="p-1 btn btn-primary btn-sm-2 text-white float-right" (click)="getUser(user)"> Edit </button>
+        </div>
+        <div class="col-sm-1">
+            <button type="button" class="p-1 btn btn-primary btn-sm-2 text-white float-right" (click)="deleteUser(user)"> Delete </button>
+        </div>
+    </div>
+
+</div>
